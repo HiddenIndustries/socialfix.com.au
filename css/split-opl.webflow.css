@@ -35,6 +35,23 @@ a {
   align-content: flex-start;
 }
 
+/* Mobile fixes for columns height */
+@media screen and (max-width: 991px) {
+  .columns {
+    height: auto; /* Remove fixed height on mobile */
+    max-height: none; /* Remove max-height constraint */
+    min-height: 100vh; /* Use min-height instead to allow expansion */
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .columns {
+    height: auto;
+    max-height: none;
+    min-height: auto; /* Let it size naturally on small screens */
+  }
+}
+
 .name {
   color: #ddd;
   font-size: 26px;
@@ -173,80 +190,161 @@ a {
   filter: drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7));
 }
 
+/* Add spacing between main sections */
+.w-row + .w-row {
+  margin-top: 60px;
+  padding-top: 40px;
+}
+
+/* Fix the specific overlapping issue with the second w-row */
+.w-row:nth-child(2) {
+  margin-top: 60px;
+  padding-top: 40px;
+  background-color: #0b1c2f;
+  clear: both; /* Ensure it clears any floated elements */
+}
+
+/* Ensure proper spacing for the social media section */
+.w-row:nth-child(2) {
+  background-color: #0b1c2f;
+  padding: 40px 20px;
+  margin-top: 0;
+}
+
+/* Fix slider height responsiveness */
+.slider {
+  height: 400px;
+  max-height: 80vh; /* Prevent it from being too tall on small screens */
+}
+
+/* Improve mobile layout for the three-column section */
 @media screen and (max-width: 991px) {
-  .leftcontent {
-    display: block;
-    -o-object-position: 50% 0%;
-    object-position: 50% 0%;
-  }
-  .logo img {
-    width: 50vw;
-  }
-
-
-  .columns {
-    display: block;
-  }
-
   .rightcontent {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding: 2em;
   }
 
-  .links {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  .w-row:nth-child(2) {
+    margin-top: 40px;
+    padding-top: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
-
-  .column {
-    margin-bottom: 20px;
+  
+  .w-row:nth-child(2) .w-col {
+    margin-bottom: 40px;
   }
-
-  .column-2 {
-    margin-bottom: 20px;
-  }
-
-  .image {
-    position: static;
-    max-height: 90vh;
-    min-height: 85vh;
-    background-position: 50% 0%;
+  
+  .slider {
+    height: 300px;
+    max-height: 60vh;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .rightcontent {
-    padding: 60px;
+  .w-row + .w-row {
+    margin-top: 40px;
+    padding-top: 20px;
+  }
+  
+  .w-row:nth-child(2) {
+    margin-top: 30px;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .w-row:nth-child(2) .w-col {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .slider {
+    height: 250px;
+    max-height: 50vh;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .bold-text {
-    font-size: 42px;
-    line-height: 42px;
+  .w-row:nth-child(2) {
+    margin-top: 20px;
+    padding: 15px 5px;
   }
-
-  .bio {
-    font-size: 16px;
+  
+  .w-row:nth-child(2) .w-col {
+    margin-bottom: 25px;
   }
-
+  
+  .slider {
+    height: 200px;
+    max-height: 40vh;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Ensure credit section has proper spacing */
   .credit {
-    font-size: 12px;
+    margin-top: 40px;
+    padding: 20px;
   }
-
-  .rightcontent {
-    padding: 30px;
+  
+  /* Fix Instagram widget container */
+  .elfsight-app-4f3437b5-e2c5-49f6-bd9f-03f27d37d98f {
+    margin-bottom: 20px;
+    max-width: 100%;
+    overflow: hidden;
   }
+}
 
-  .image {
-    height: 240px;
-    max-height: 30vh;
+/* Fix potential Instagram widget overflow */
+.elfsight-app-4f3437b5-e2c5-49f6-bd9f-03f27d37d98f {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Ensure Facebook widget doesn't overflow */
+.fb-page {
+  margin: 0 auto;
+    display: block;
+    text-align: center;
+    max-width: 100%;
+}
+
+/* Center Facebook widget on mobile */
+@media screen and (max-width: 991px) {
+  .fb-page {
+    margin: 0 auto !important;
+    display: block !important;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  /* Ensure the column centers its content */
+  .w-col:last-child {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .fb-page {
+    margin: 20px auto !important;
+    display: block !important;
+    text-align: center;
+    max-width: 95%;
+  }
+  
+  /* Override Facebook's inline styles */
+  .fb-page[data-adapt-container-width="true"] {
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .fb-page {
+    margin: 15px auto !important;
+    max-width: 90%;
   }
 }
